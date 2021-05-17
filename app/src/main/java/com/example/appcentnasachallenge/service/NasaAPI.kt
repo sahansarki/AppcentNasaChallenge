@@ -1,6 +1,9 @@
 package com.example.appcentnasachallenge.service
 
 import com.example.appcentnasachallenge.model.APIRoverModel
+import com.example.appcentnasachallenge.model.Photos
+import io.reactivex.Observable
+import io.reactivex.Observer
 import io.reactivex.Single
 import retrofit2.http.GET
 

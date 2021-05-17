@@ -10,7 +10,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    val firstViewModel = CuriosityViewModel()
+    private val curiosityViewModel = CuriosityViewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        vpRoverCategory.adapter = CategoryRoverAdapter(this,firstViewModel.getFragmentModelList())
-        val titles = firstViewModel.getTitle()
+        vpRoverCategory.adapter = CategoryRoverAdapter(this,curiosityViewModel.getFragmentModelList())
+        val titles = curiosityViewModel.getTitle()
         TabLayoutMediator(
             tabLayoutRoverategory,
             vpRoverCategory,

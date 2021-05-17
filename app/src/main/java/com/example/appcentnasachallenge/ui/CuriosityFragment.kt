@@ -37,13 +37,13 @@ class CuriosityFragment : Fragment(R.layout.fragment_curiosity) {
     }
 
     private fun observeLiveData() {
-        viewModelCuriosity.rovers.observe(viewLifecycleOwner) { rovers ->
+        viewModelCuriosity.rovers.observe(viewLifecycleOwner, { rovers ->
             rovers?.let {
                 recycRoversList.visibility = View.VISIBLE
-                //RoversPhotoAdapter.updateRoverList(rovers)
+                roverAdapter.updateRoverPhotos(rovers)
             }
 
-        }
+        })
 
 
     }
