@@ -2,8 +2,9 @@ package com.example.appcentnasachallenge.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.appcentnasachallenge.model.APIRoverModel
 
-class RoversPhotoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RoversPhotoAdapter(private val roverPhotos : List<APIRoverModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         TODO("Not yet implemented")
     }
