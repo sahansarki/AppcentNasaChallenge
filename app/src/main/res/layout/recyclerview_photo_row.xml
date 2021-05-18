@@ -36,16 +36,19 @@
             android:id="@+id/rover_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:text="sadasdsa" />
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="3dp"
+            android:textStyle="bold"
+            android:text="" />
 
 
         <TextView
             android:id="@+id/rover_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="asdadssadasdad"
-            android:layout_marginTop="25dp"
+            android:text=""
+            android:textStyle="bold"
+            android:layout_marginBottom="5dp"
             android:textColor="@color/colorPrimary"
             />
 

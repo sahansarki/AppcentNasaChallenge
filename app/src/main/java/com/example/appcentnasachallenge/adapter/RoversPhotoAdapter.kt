@@ -19,10 +19,13 @@ class RoversPhotoAdapter(var roverPhotos: APIRoverModel?) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
+
         val layoutInflater = LayoutInflater.from(parent.context)
         val cellForRow = layoutInflater.inflate(R.layout.recyclerview_photo_row,parent,false)
         return CustomViewHolder(cellForRow)
     }
+
+
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
 
@@ -40,10 +43,10 @@ class RoversPhotoAdapter(var roverPhotos: APIRoverModel?) :
 
         //holder.view.rover_photo.setImageResource(R.mipmap.ic_launcher)
 
-        val name_text = roverPhotos!!.photos[position].rover.name
+        val name_text = roverPhotos!!.photos[position].camera.full_name
         holder.view.rover_name.text = name_text
 
-        val status_text = roverPhotos!!.photos[position].rover.status
+        val status_text = roverPhotos!!.photos[position].camera.name
         holder.view.rover_status.text = status_text
     }
 

@@ -19,7 +19,7 @@ import retrofit2.Response
 class CuriosityViewModel : ViewModel() {
 
     private val nasaApiService = NasaAPIService()
-    //private val disposable = CompositeDisposable()
+
 
 
     val rovers = MutableLiveData<APIRoverModel>()
@@ -50,29 +50,9 @@ class CuriosityViewModel : ViewModel() {
 
         })
 
-        /*disposable.add(
-            nasaApiService.getDataCuriousity()
-                .subscribeOn(Schedulers.newThread())
-                .subscribeWith(object : DisposableSingleObserver<List<APIRoverModel>>() {
-                    override fun onError(e: Throwable) {
-                        e.printStackTrace()
-                    }
 
-
-
-                    override fun onSuccess(t: List<APIRoverModel>) {
-                        showPhotos(t)
-                    }
-
-
-                })
-        )*/
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        //disposable.clear()
-    }
 
     fun getFragmentModelList() : List<FragmentModel> {
         val fragmentList = ArrayList<FragmentModel>()
