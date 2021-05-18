@@ -12,17 +12,22 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class CuriosityViewModel : ViewModel() {
 
     private val nasaApiService = NasaAPIService()
-    private val disposable = CompositeDisposable()
-
-    val rovers = MutableLiveData<List<APIRoverModel>>()
+    //private val disposable = CompositeDisposable()
 
 
+    val rovers = MutableLiveData<APIRoverModel>()
 
-    private fun showPhotos(roverList : List<APIRoverModel>) {
+
+
+    private fun showPhotos(roverList : APIRoverModel) {
+
         rovers.value = roverList
 
     }
@@ -30,8 +35,22 @@ class CuriosityViewModel : ViewModel() {
     fun getDatafromAPI() {
 
 
+        var call = nasaApiService.getDataCuriousity()
 
-        disposable.add(
+        call.enqueue(object: Callback<APIRoverModel> {
+            override fun onResponse(call: Call<APIRoverModel>, response: Response<APIRoverModel>) {
+                var roverModels = response.body()
+                showPhotos(roverModels!!)
+            }
+
+            override fun onFailure(call: Call<APIRoverModel>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+
+        })
+
+        /*disposable.add(
             nasaApiService.getDataCuriousity()
                 .subscribeOn(Schedulers.newThread())
                 .subscribeWith(object : DisposableSingleObserver<List<APIRoverModel>>() {
@@ -47,12 +66,12 @@ class CuriosityViewModel : ViewModel() {
 
 
                 })
-        )
+        )*/
     }
 
     override fun onCleared() {
         super.onCleared()
-        disposable.clear()
+        //disposable.clear()
     }
 
     fun getFragmentModelList() : List<FragmentModel> {

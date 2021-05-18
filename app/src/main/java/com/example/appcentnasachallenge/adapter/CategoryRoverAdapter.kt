@@ -13,13 +13,22 @@ class CategoryRoverAdapter(fa : FragmentActivity, private val roversFragmentList
 
     override fun createFragment(position: Int): Fragment {
 
-        if(roversFragmentList[position].fragmentTitle == "Curiosity") return CuriosityFragment()
-        else if(roversFragmentList[position].fragmentTitle == "Opportunity") return OpportunityFragment()
-        else if(roversFragmentList[position].fragmentTitle == "Spirit") return SpiritFragment()
+        return when (roversFragmentList[position].fragmentTitle) {
+            "Curiosity" -> CuriosityFragment()
+            "Opportunity" -> OpportunityFragment()
+            "Spirit" -> SpiritFragment()
 
-        else {
-            return CuriosityFragment()
+            else -> CuriosityFragment()
+
         }
+
+        /* if(roversFragmentList[position].fragmentTitle == "Curiosity") return CuriosityFragment()
+        else if(roversFragmentList[position].fragmentTitle == "Opportunity") return OpportunityFragment()
+        else if(roversFragmentList[position].fragmentTitle == "Spirit") return SpiritFragment()*/
+
+        /*else {
+            return CuriosityFragment()
+        }*/
     }
 
 }

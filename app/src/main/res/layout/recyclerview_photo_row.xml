@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_margin="3dp"
     >
@@ -17,11 +17,11 @@
 
         <ImageView
             android:id="@+id/rover_photo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             tools:layout_editor_absoluteX="29dp"
             tools:layout_editor_absoluteY="25dp"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:src="@mipmap/ic_launcher" />
 
     </LinearLayout>
 
@@ -33,7 +33,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/rover_status"
+            android:id="@+id/rover_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
@@ -41,6 +41,7 @@
 
 
         <TextView
+            android:id="@+id/rover_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="asdadssadasdad"

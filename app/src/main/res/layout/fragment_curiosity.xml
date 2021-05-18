@@ -12,7 +12,7 @@
         android:id="@+id/recycRoversList"
         android:layout_width="match_parent"
         app:layoutManager="LinearLayoutManager"
-        android:background="@color/colorPrimaryDark"
+
         android:layout_height="match_parent"
         />
 

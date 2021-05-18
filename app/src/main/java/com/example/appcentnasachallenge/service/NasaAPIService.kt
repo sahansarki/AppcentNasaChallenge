@@ -5,6 +5,7 @@ import com.example.appcentnasachallenge.model.Photos
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.Single
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -15,19 +16,19 @@ class NasaAPIService {
     private val api = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        //.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .build()
         .create(NasaAPI::class.java)
 
-    fun getDataCuriousity(): Single<List<APIRoverModel>> {
+    fun getDataCuriousity(): Call<APIRoverModel> {
         return api.getCuriosityRover()
     }
 
-    fun getDataOpportunity(): Single<List<APIRoverModel>> {
+    fun getDataOpportunity(): Call<APIRoverModel>{
         return api.getopportunityRover()
     }
 
-    fun getDataSpirit(): Single<List<APIRoverModel>> {
+    fun getDataSpirit(): Call<APIRoverModel> {
         return api.getSpiritRover()
     }
 }

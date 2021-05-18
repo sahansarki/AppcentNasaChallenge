@@ -74,4 +74,5 @@ dependencies {
 
 
     implementation "androidx.preference:preference:$preferencesVersion"
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }

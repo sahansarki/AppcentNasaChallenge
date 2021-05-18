@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.appcentnasachallenge.R
 import com.example.appcentnasachallenge.adapter.RoversPhotoAdapter
+import com.example.appcentnasachallenge.model.APIRoverModel
 import com.example.appcentnasachallenge.viewmodel.CuriosityViewModel
 import kotlinx.android.synthetic.main.fragment_curiosity.*
 
@@ -18,13 +19,17 @@ import kotlinx.android.synthetic.main.fragment_curiosity.*
 class CuriosityFragment : Fragment(R.layout.fragment_curiosity) {
 
     private lateinit var viewModelCuriosity : CuriosityViewModel
-    private val roverAdapter = RoversPhotoAdapter(arrayListOf())
+
+
+    private val roverAdapter = RoversPhotoAdapter(null)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModelCuriosity = ViewModelProviders.of(this).get(CuriosityViewModel::class.java)
         viewModelCuriosity.getDatafromAPI()
+
+
 
         recycRoversList.layoutManager = LinearLayoutManager(context)
         recycRoversList.adapter = roverAdapter
@@ -36,11 +41,16 @@ class CuriosityFragment : Fragment(R.layout.fragment_curiosity) {
 
     }
 
+
+
     private fun observeLiveData() {
         viewModelCuriosity.rovers.observe(viewLifecycleOwner, { rovers ->
             rovers?.let {
                 recycRoversList.visibility = View.VISIBLE
+                //roverAdapter.changed()
+                roverAdapter.roverPhotos = rovers
                 roverAdapter.updateRoverPhotos(rovers)
+
             }
 
         })

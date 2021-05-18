@@ -1,7 +1,7 @@
 package com.example.appcentnasachallenge.model
 
 data class APIRoverModel(
-    val photos : List<Photos>
+    var photos : ArrayList<Photos>
 )
 
 data class Photos(
