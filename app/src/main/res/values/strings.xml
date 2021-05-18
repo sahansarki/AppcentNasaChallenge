@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">AppcentNasaChallenge</string>
+    <string-array name="choices">
+        <item>CLICK TO SEE PARTICULAR PHOTOS</item>
+        <item>FHAZ</item>
+        <item>RHAZ</item>
+        <item>MAST</item>
+        <item>CHEMCAM</item>
+        <item>NAVCAM</item>
+
+    </string-array>
 </resources>

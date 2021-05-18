@@ -2,6 +2,7 @@ package com.example.appcentnasachallenge.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -52,4 +53,6 @@ class SpiritFragment : Fragment(R.layout.fragment_spirit) {
 
 
     }
+
+
 }

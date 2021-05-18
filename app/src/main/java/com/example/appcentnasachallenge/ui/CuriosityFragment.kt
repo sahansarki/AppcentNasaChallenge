@@ -2,8 +2,12 @@ package com.example.appcentnasachallenge.ui
 
 
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProviders
@@ -16,7 +20,7 @@ import com.example.appcentnasachallenge.viewmodel.CuriosityViewModel
 import kotlinx.android.synthetic.main.fragment_curiosity.*
 
 
-class CuriosityFragment : Fragment(R.layout.fragment_curiosity) {
+class CuriosityFragment : Fragment(R.layout.fragment_curiosity){
 
     private lateinit var viewModelCuriosity : CuriosityViewModel
 
@@ -26,8 +30,17 @@ class CuriosityFragment : Fragment(R.layout.fragment_curiosity) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         viewModelCuriosity = ViewModelProviders.of(this).get(CuriosityViewModel::class.java)
+        viewModelCuriosity.createSpinner(this.requireContext() ,curiosity_spinner)
+
+
         viewModelCuriosity.getDatafromAPI()
+
+        curiosity_spinner.onItemSelectedListener
+
+
 
 
 
@@ -56,5 +69,11 @@ class CuriosityFragment : Fragment(R.layout.fragment_curiosity) {
         })
 
 
+
+
     }
+
+
+
+
 }

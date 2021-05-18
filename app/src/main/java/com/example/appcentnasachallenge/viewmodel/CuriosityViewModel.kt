@@ -1,7 +1,13 @@
 package com.example.appcentnasachallenge.viewmodel
 
+import android.content.Context
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.appcentnasachallenge.R
 import com.example.appcentnasachallenge.model.APIRoverModel
 import com.example.appcentnasachallenge.model.FragmentModel
 import com.example.appcentnasachallenge.model.Photos
@@ -16,20 +22,35 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CuriosityViewModel : ViewModel() {
+class CuriosityViewModel : ViewModel(), AdapterView.OnItemSelectedListener {
 
     private val nasaApiService = NasaAPIService()
 
+    var rovers = MutableLiveData<APIRoverModel>()
+    var rovers_2 = arrayListOf<Photos>()
+    var mockRovers = arrayListOf<Photos>()
 
+    lateinit var curiositySpinner: Spinner
 
-    val rovers = MutableLiveData<APIRoverModel>()
-
-
-
-    private fun showPhotos(roverList : APIRoverModel) {
+    private fun showPhotos(roverList: APIRoverModel) {
 
         rovers.value = roverList
+        rovers_2 = roverList.photos
 
+
+    }
+
+    fun createSpinner(context: Context, spinner: Spinner) {
+        ArrayAdapter.createFromResource(
+            context,
+            R.array.choices,
+            R.layout.support_simple_spinner_dropdown_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
+            spinner.adapter = adapter
+            spinner.onItemSelectedListener = this
+            curiositySpinner = spinner
+        }
     }
 
     fun getDatafromAPI() {
@@ -37,9 +58,10 @@ class CuriosityViewModel : ViewModel() {
 
         var call = nasaApiService.getDataCuriousity()
 
-        call.enqueue(object: Callback<APIRoverModel> {
+        call.enqueue(object : Callback<APIRoverModel> {
             override fun onResponse(call: Call<APIRoverModel>, response: Response<APIRoverModel>) {
                 var roverModels = response.body()
+
                 showPhotos(roverModels!!)
             }
 
@@ -54,7 +76,7 @@ class CuriosityViewModel : ViewModel() {
     }
 
 
-    fun getFragmentModelList() : List<FragmentModel> {
+    fun getFragmentModelList(): List<FragmentModel> {
         val fragmentList = ArrayList<FragmentModel>()
 
         repeat(getTitle().size) { position ->
@@ -70,9 +92,48 @@ class CuriosityViewModel : ViewModel() {
 
     }
 
-    fun getTitle() : List<String> {
-        val titles = arrayListOf("Curiosity" , "Opportunity", "Spirit")
+    fun getTitle(): List<String> {
+        val titles = arrayListOf("Curiosity", "Opportunity", "Spirit")
         return titles
 
     }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+
+        val selectedOption = parent!!.getItemAtPosition(position).toString()
+
+        if (selectedOption == parent!!.getItemAtPosition(0).toString()) {
+            return
+        }
+
+
+        if(mockRovers != null) {
+            mockRovers.clear()
+        }
+
+
+        for (i in 0..(rovers_2.size)-1) {
+            if (rovers_2[i].camera.name == selectedOption) {
+                mockRovers.add(rovers_2[i])
+            }
+        }
+
+
+        rovers.value!!.photos.clear().also {
+            for (i in 0..(mockRovers.size)-1){
+                rovers.value!!.photos.add(mockRovers[i])
+
+            }
+        }
+
+        showPhotos(rovers.value!!)
+
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+        return
+    }
+
+
 }
