@@ -9,4 +9,12 @@
         <item>NAVCAM</item>
 
     </string-array>
+
+    <string-array name="choices_opportunity">
+        <item>CLICK TO SEE PARTICULAR PHOTOS</item>
+        <item>NAVCAM</item>
+        <item>PANCAM</item>
+
+
+    </string-array>
 </resources>

@@ -33,7 +33,7 @@ class CuriosityFragment : Fragment(R.layout.fragment_curiosity){
 
 
 
-        //viewModelCuriosity = ViewModelProviders.of(this).get(CuriosityViewModel::class.java)
+
         viewModelCuriosity = ViewModelProvider(this).get(CuriosityViewModel::class.java)
         viewModelCuriosity.createSpinner(this.requireContext() ,curiosity_spinner)
 

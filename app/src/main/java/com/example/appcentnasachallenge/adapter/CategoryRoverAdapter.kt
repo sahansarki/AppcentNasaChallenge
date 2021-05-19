@@ -22,13 +22,7 @@ class CategoryRoverAdapter(fa : FragmentActivity, private val roversFragmentList
 
         }
 
-        /* if(roversFragmentList[position].fragmentTitle == "Curiosity") return CuriosityFragment()
-        else if(roversFragmentList[position].fragmentTitle == "Opportunity") return OpportunityFragment()
-        else if(roversFragmentList[position].fragmentTitle == "Spirit") return SpiritFragment()*/
 
-        /*else {
-            return CuriosityFragment()
-        }*/
     }
 
 }

@@ -13,6 +13,8 @@ import com.example.appcentnasachallenge.viewmodel.CuriosityViewModel
 import com.example.appcentnasachallenge.viewmodel.OpportunityViewModel
 import com.example.appcentnasachallenge.viewmodel.SpiritViewModel
 import kotlinx.android.synthetic.main.fragment_curiosity.*
+import kotlinx.android.synthetic.main.fragment_curiosity.recycRoversList
+import kotlinx.android.synthetic.main.fragment_spirit.*
 
 class SpiritFragment : Fragment(R.layout.fragment_spirit) {
 
@@ -25,6 +27,7 @@ class SpiritFragment : Fragment(R.layout.fragment_spirit) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModelSpirit = ViewModelProvider(this).get(SpiritViewModel::class.java)
+        viewModelSpirit.createSpinner(this.requireContext(), spirit_spinner)
         viewModelSpirit.getDatafromAPI_Spirit()
 
 

@@ -7,14 +7,11 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.appcentnasachallenge.R
 import com.example.appcentnasachallenge.model.APIRoverModel
 import com.example.appcentnasachallenge.model.FragmentModel
 import com.example.appcentnasachallenge.model.Photos
 import com.example.appcentnasachallenge.service.NasaAPIService
-import com.example.appcentnasachallenge.service.PhotoDatabase
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -57,7 +54,6 @@ class CuriosityViewModel(application: Application) : BaseViewModel(application),
         call.enqueue(object : Callback<APIRoverModel> {
             override fun onResponse(call: Call<APIRoverModel>, response: Response<APIRoverModel>) {
                 var roverModels = response.body()
-                //storeInSQLite(roverModels!!.photos)
                 rovers_2 = roverModels!!.photos.clone() as List<Photos>
                 showPhotos(roverModels!!)
             }
@@ -95,24 +91,7 @@ class CuriosityViewModel(application: Application) : BaseViewModel(application),
 
     }
 
-//    private fun storeInSQLite(list: List<Photos>) {
-//        launch {
-//            val dao = PhotoDatabase(getApplication()).photoDao()
-//
-//            dao.deleteAllPhotos()
-//            dao.insertAll(*list.toTypedArray())
-//
-//        }
-//
-//    }
-//
-//    private fun getDataFromSQLite() {
-//        launch {
-//            rovers_2 = PhotoDatabase(getApplication()).photoDao().getAllPhotos()
-//
-//
-//        }
-//    }
+
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
@@ -128,7 +107,7 @@ class CuriosityViewModel(application: Application) : BaseViewModel(application),
             mockRovers.clear()
         }
 
-        //getDataFromSQLite()
+
 
         for (i in 0..(rovers_2.size)-1) {
             if (rovers_2[i].camera.name == selectedOption) {
