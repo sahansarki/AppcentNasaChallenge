@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 
@@ -32,7 +33,8 @@ class CuriosityFragment : Fragment(R.layout.fragment_curiosity){
 
 
 
-        viewModelCuriosity = ViewModelProviders.of(this).get(CuriosityViewModel::class.java)
+        //viewModelCuriosity = ViewModelProviders.of(this).get(CuriosityViewModel::class.java)
+        viewModelCuriosity = ViewModelProvider(this).get(CuriosityViewModel::class.java)
         viewModelCuriosity.createSpinner(this.requireContext() ,curiosity_spinner)
 
 

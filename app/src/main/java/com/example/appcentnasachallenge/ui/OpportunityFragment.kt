@@ -3,6 +3,7 @@ package com.example.appcentnasachallenge.ui
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appcentnasachallenge.R
@@ -21,7 +22,7 @@ class OpportunityFragment : Fragment(R.layout.fragment_opportunity) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModelOpportunity = ViewModelProviders.of(this).get(OpportunityViewModel::class.java)
+        viewModelOpportunity = ViewModelProvider(this).get(OpportunityViewModel::class.java)
         viewModelOpportunity.getDatafromAPI_Opportunity()
 
 

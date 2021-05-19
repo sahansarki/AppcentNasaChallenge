@@ -1,5 +1,6 @@
 package com.example.appcentnasachallenge.viewmodel
 
+import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.appcentnasachallenge.model.APIRoverModel
@@ -9,7 +10,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class OpportunityViewModel : ViewModel(){
+class OpportunityViewModel(application: Application) : BaseViewModel(application){
 
     private val nasaApiService = NasaAPIService()
 

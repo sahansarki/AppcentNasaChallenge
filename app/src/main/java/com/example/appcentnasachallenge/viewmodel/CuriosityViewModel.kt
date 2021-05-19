@@ -1,5 +1,6 @@
 package com.example.appcentnasachallenge.viewmodel
 
+import android.app.Application
 import android.content.Context
 import android.view.View
 import android.widget.AdapterView
@@ -12,30 +13,25 @@ import com.example.appcentnasachallenge.model.APIRoverModel
 import com.example.appcentnasachallenge.model.FragmentModel
 import com.example.appcentnasachallenge.model.Photos
 import com.example.appcentnasachallenge.service.NasaAPIService
-import com.example.appcentnasachallenge.ui.CuriosityFragment
-import io.reactivex.Observable
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.observers.DisposableObserver
-import io.reactivex.observers.DisposableSingleObserver
-import io.reactivex.schedulers.Schedulers
+import com.example.appcentnasachallenge.service.PhotoDatabase
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CuriosityViewModel : ViewModel(), AdapterView.OnItemSelectedListener {
+class CuriosityViewModel(application: Application) : BaseViewModel(application), AdapterView.OnItemSelectedListener {
 
     private val nasaApiService = NasaAPIService()
 
     var rovers = MutableLiveData<APIRoverModel>()
-    var rovers_2 = arrayListOf<Photos>()
+    var rovers_2 = listOf<Photos>()
     var mockRovers = arrayListOf<Photos>()
 
     lateinit var curiositySpinner: Spinner
 
     private fun showPhotos(roverList: APIRoverModel) {
 
-        rovers.value = roverList
-        rovers_2 = roverList.photos
+        rovers.value = roverList.copy()
 
 
     }
@@ -61,7 +57,8 @@ class CuriosityViewModel : ViewModel(), AdapterView.OnItemSelectedListener {
         call.enqueue(object : Callback<APIRoverModel> {
             override fun onResponse(call: Call<APIRoverModel>, response: Response<APIRoverModel>) {
                 var roverModels = response.body()
-
+                //storeInSQLite(roverModels!!.photos)
+                rovers_2 = roverModels!!.photos.clone() as List<Photos>
                 showPhotos(roverModels!!)
             }
 
@@ -98,6 +95,25 @@ class CuriosityViewModel : ViewModel(), AdapterView.OnItemSelectedListener {
 
     }
 
+//    private fun storeInSQLite(list: List<Photos>) {
+//        launch {
+//            val dao = PhotoDatabase(getApplication()).photoDao()
+//
+//            dao.deleteAllPhotos()
+//            dao.insertAll(*list.toTypedArray())
+//
+//        }
+//
+//    }
+//
+//    private fun getDataFromSQLite() {
+//        launch {
+//            rovers_2 = PhotoDatabase(getApplication()).photoDao().getAllPhotos()
+//
+//
+//        }
+//    }
+
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
 
@@ -112,6 +128,7 @@ class CuriosityViewModel : ViewModel(), AdapterView.OnItemSelectedListener {
             mockRovers.clear()
         }
 
+        //getDataFromSQLite()
 
         for (i in 0..(rovers_2.size)-1) {
             if (rovers_2[i].camera.name == selectedOption) {

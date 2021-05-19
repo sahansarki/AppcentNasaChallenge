@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -42,6 +43,7 @@ dependencies {
     def rxJavaVersion = '2.1.1'
     def navVersion = '2.3.5'
     def preferencesVersion = '1.1.1'
+    def roomVersion = '2.3.0'
 
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -75,4 +77,10 @@ dependencies {
 
     implementation "androidx.preference:preference:$preferencesVersion"
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    implementation "androidx.room:room-runtime:$roomVersion"
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1"
 }

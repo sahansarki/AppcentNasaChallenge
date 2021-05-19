@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appcentnasachallenge.R
@@ -23,7 +24,7 @@ class SpiritFragment : Fragment(R.layout.fragment_spirit) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModelSpirit = ViewModelProviders.of(this).get(SpiritViewModel::class.java)
+        viewModelSpirit = ViewModelProvider(this).get(SpiritViewModel::class.java)
         viewModelSpirit.getDatafromAPI_Spirit()
 
 
