@@ -11,7 +11,8 @@
     <Spinner
         android:id="@+id/spirit_spinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@color/nonSelectedText"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycRoversList"

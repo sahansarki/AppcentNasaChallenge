@@ -12,13 +12,13 @@
     <Spinner
         android:id="@+id/opportunity_spinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@color/nonSelectedText"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycRoversList"
         android:layout_width="match_parent"
         app:layoutManager="LinearLayoutManager"
-        android:background="@color/purple_200"
         android:layout_height="match_parent"
         />
 

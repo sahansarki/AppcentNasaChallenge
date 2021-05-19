@@ -25,7 +25,7 @@ data class Camera(
 data class Rover(
     val name : String,
     val landing_date : String,
-    val launch_data : String,
+    val launch_date : String,
     val status : String
 
 )

@@ -1,5 +1,6 @@
 package com.example.appcentnasachallenge.adapter
 
+import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,10 @@ import com.example.appcentnasachallenge.R
 import com.example.appcentnasachallenge.model.APIRoverModel
 import com.example.appcentnasachallenge.model.Photos
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.pop_up.view.*
 import kotlinx.android.synthetic.main.recyclerview_photo_row.view.*
+import kotlinx.android.synthetic.main.recyclerview_photo_row.view.rover_name
+import kotlinx.android.synthetic.main.recyclerview_photo_row.view.rover_status
 
 class RoversPhotoAdapter(var roverPhotos: APIRoverModel?) :
     RecyclerView.Adapter<RoversPhotoAdapter.CustomViewHolder>() {
@@ -37,11 +41,33 @@ class RoversPhotoAdapter(var roverPhotos: APIRoverModel?) :
             .centerCrop()
             .dontAnimate()
             .into(holder.view.rover_photo)
-        //Picasso.get().load(photo).into(holder.itemView.rover_photo)
 
 
 
-        //holder.view.rover_photo.setImageResource(R.mipmap.ic_launcher)
+        holder.view.setOnClickListener {
+            val mDialogView = LayoutInflater.from(it.context.applicationContext).inflate(R.layout.pop_up,null)
+
+            Glide.with(it.context.applicationContext)
+                .load(photo)
+                .centerCrop()
+                .dontAnimate()
+                .into(it.roverImage)
+
+            mDialogView.rover_date.text = "Rover Date = ${roverPhotos!!.photos[position].earth_date}"
+            mDialogView.rover_name.text = "Rover Name = ${roverPhotos!!.photos[position].rover.name}"
+            mDialogView.rover_cameraName.text = "Rover Camera = ${roverPhotos!!.photos[position].camera.full_name}"
+            mDialogView.rover_status.text = "Rover Status = ${roverPhotos!!.photos[position].rover.status}"
+            mDialogView.rover_launchDate.text = "Rover Launch Date = ${roverPhotos!!.photos[position].rover.launch_date}"
+            mDialogView.rover_landingDate.text = "Rover Landing Date = ${roverPhotos!!.photos[position].rover.landing_date}"
+
+            val mBuilder = AlertDialog.Builder(it.context)
+                .setView(mDialogView)
+            mBuilder.show()
+
+
+        }
+
+
 
         val name_text = roverPhotos!!.photos[position].camera.full_name
         holder.view.rover_name.text = name_text
