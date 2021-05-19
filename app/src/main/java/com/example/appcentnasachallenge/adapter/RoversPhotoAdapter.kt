@@ -51,7 +51,7 @@ class RoversPhotoAdapter(var roverPhotos: APIRoverModel?) :
                 .load(photo)
                 .centerCrop()
                 .dontAnimate()
-                .into(it.roverImage)
+                .into(mDialogView.roverImage)
 
             mDialogView.rover_date.text = "Rover Date = ${roverPhotos!!.photos[position].earth_date}"
             mDialogView.rover_name.text = "Rover Name = ${roverPhotos!!.photos[position].rover.name}"
