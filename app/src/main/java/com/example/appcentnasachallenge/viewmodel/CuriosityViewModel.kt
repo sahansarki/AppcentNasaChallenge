@@ -49,13 +49,14 @@ class CuriosityViewModel(application: Application) : BaseViewModel(application),
     fun getDatafromAPI() {
 
 
-        var call = nasaApiService.getDataCuriousity()
+        val call = nasaApiService.getDataCuriousity()
 
         call.enqueue(object : Callback<APIRoverModel> {
             override fun onResponse(call: Call<APIRoverModel>, response: Response<APIRoverModel>) {
-                var roverModels = response.body()
-                rovers_2 = roverModels!!.photos.clone() as List<Photos>
-                showPhotos(roverModels!!)
+                val roverModels = response.body() ?: return
+
+                rovers_2 = roverModels.photos.clone() as List<Photos>
+                showPhotos(roverModels)
             }
 
             override fun onFailure(call: Call<APIRoverModel>, t: Throwable) {
@@ -86,8 +87,7 @@ class CuriosityViewModel(application: Application) : BaseViewModel(application),
     }
 
     fun getTitle(): List<String> {
-        val titles = arrayListOf("Curiosity", "Opportunity", "Spirit")
-        return titles
+        return arrayListOf("Curiosity", "Opportunity", "Spirit")
 
     }
 
@@ -96,34 +96,33 @@ class CuriosityViewModel(application: Application) : BaseViewModel(application),
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
 
-        val selectedOption = parent!!.getItemAtPosition(position).toString()
+        val selectedOption = parent.let {
+            parent?.getItemAtPosition(position).toString()
+        }
 
         if (selectedOption == parent!!.getItemAtPosition(0).toString()) {
             return
         }
 
 
-        if(mockRovers != null) {
-            mockRovers.clear()
-        }
+        mockRovers.clear()
 
 
 
-        for (i in 0..(rovers_2.size)-1) {
+        for (i in rovers_2.indices) {
             if (rovers_2[i].camera.name == selectedOption) {
                 mockRovers.add(rovers_2[i])
             }
         }
 
-
         rovers.value!!.photos.clear().also {
-            for (i in 0..(mockRovers.size)-1){
-                rovers.value!!.photos.add(mockRovers[i])
-
+            mockRovers.filter {
+                rovers.value!!.photos.add(it)
             }
         }
 
         showPhotos(rovers.value!!)
+
 
     }
 

@@ -6,8 +6,8 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.appcentnasachallenge.R
 import com.example.appcentnasachallenge.model.APIRoverModel
 import com.example.appcentnasachallenge.model.Photos
@@ -23,7 +23,7 @@ class SpiritViewModel(application : Application) : BaseViewModel(application), A
     val spiritRovers = MutableLiveData<APIRoverModel>()
     var rovers_2 = listOf<Photos>()
     var mockRovers = arrayListOf<Photos>()
-    lateinit var spiritSpinner: Spinner
+    lateinit var  spiritSpinner: Spinner
 
 
     private fun showPhotos(roverList : APIRoverModel) {
@@ -32,20 +32,21 @@ class SpiritViewModel(application : Application) : BaseViewModel(application), A
 
     }
 
-    fun getDatafromAPI_Spirit() {
+    fun getDatafromAPISpirit() {
 
 
-        var call = nasaApiService.getDataSpirit()
+        val call = nasaApiService.getDataSpirit()
 
         call.enqueue(object: Callback<APIRoverModel> {
             override fun onResponse(call: Call<APIRoverModel>, response: Response<APIRoverModel>) {
-                var roverModels = response.body()
-                rovers_2 = roverModels!!.photos.clone() as List<Photos>
-                showPhotos(roverModels!!)
+                val roverModels = response.body() ?: return
+
+                rovers_2 = roverModels.photos.clone() as List<Photos>
+                showPhotos(roverModels)
             }
 
             override fun onFailure(call: Call<APIRoverModel>, t: Throwable) {
-                t.printStackTrace()
+                Toast.makeText(getApplication(),"${t.printStackTrace()}",Toast.LENGTH_LONG).show()
             }
 
 
@@ -56,7 +57,7 @@ class SpiritViewModel(application : Application) : BaseViewModel(application), A
     fun createSpinner(context: Context, spinner: Spinner) {
         ArrayAdapter.createFromResource(
             context,
-            R.array.choices_opportunity,
+            R.array.choices_spirit,
             R.layout.support_simple_spinner_dropdown_item
         ).also { adapter ->
             adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
@@ -67,34 +68,34 @@ class SpiritViewModel(application : Application) : BaseViewModel(application), A
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        val selectedOption = parent!!.getItemAtPosition(position).toString()
+
+        val selectedOption = parent.let {
+            parent?.getItemAtPosition(position).toString()
+        }
 
         if (selectedOption == parent!!.getItemAtPosition(0).toString()) {
             return
         }
 
 
-        if(mockRovers != null) {
-            mockRovers.clear()
-        }
+        mockRovers.clear()
 
 
 
-        for (i in 0..(rovers_2.size)-1) {
+        for (i in rovers_2.indices) {
             if (rovers_2[i].camera.name == selectedOption) {
-                mockRovers.add(rovers_2[i])
+                mockRovers.add(rovers_2[i]) // Adding all photos into mockRovers
             }
         }
 
-
         spiritRovers.value!!.photos.clear().also {
-            for (i in 0..(mockRovers.size)-1){
-                spiritRovers.value!!.photos.add(mockRovers[i])
-
+            mockRovers.filter {
+                spiritRovers.value!!.photos.add(it)
             }
         }
 
         showPhotos(spiritRovers.value!!)
+
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {

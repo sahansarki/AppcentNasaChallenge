@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">AppcentNasaChallenge</string>
     <string-array name="choices">
-        <item>CLICK TO CHOICE PARTICULAR PHOTOS</item>
+        <item>CLICK TO FILTER PHOTOS</item>
         <item>FHAZ</item>
         <item>RHAZ</item>
         <item>MAST</item>
@@ -11,10 +11,19 @@
     </string-array>
 
     <string-array name="choices_opportunity">
-        <item>CLICK TO SEE CHOICE PHOTOS</item>
+        <item>CLICK TO FILTER PHOTOS</item>
+        <item>FHAZ</item>
+        <item>RHAZ</item>
         <item>NAVCAM</item>
         <item>PANCAM</item>
+        <item>MINITES</item>
+    </string-array>
 
-
+    <string-array name="choices_spirit">
+        <item>CLICK TO FILTER PHOTOS</item>
+        <item>FHAZ</item>
+        <item>RHAZ</item>
+        <item>NAVCAM</item>
+        <item>PANCAM</item>
     </string-array>
 </resources>

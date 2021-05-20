@@ -13,10 +13,7 @@ data class Photos(
     val img_src : String,
     val earth_date : String,
 
-) {
-
-}
-
+)
 data class Camera(
     val name : String,
     val full_name : String

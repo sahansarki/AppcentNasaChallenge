@@ -2,21 +2,13 @@ package com.example.appcentnasachallenge.ui
 
 
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.example.appcentnasachallenge.R
 import com.example.appcentnasachallenge.adapter.RoversPhotoAdapter
-import com.example.appcentnasachallenge.model.APIRoverModel
 import com.example.appcentnasachallenge.viewmodel.CuriosityViewModel
 import kotlinx.android.synthetic.main.fragment_curiosity.*
 
@@ -62,7 +54,6 @@ class CuriosityFragment : Fragment(R.layout.fragment_curiosity){
         viewModelCuriosity.rovers.observe(viewLifecycleOwner, { rovers ->
             rovers?.let {
                 recycRoversList.visibility = View.VISIBLE
-                //roverAdapter.changed()
                 roverAdapter.roverPhotos = rovers
                 roverAdapter.updateRoverPhotos(rovers)
 

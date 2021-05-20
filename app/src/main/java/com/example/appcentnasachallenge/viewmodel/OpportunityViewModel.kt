@@ -7,10 +7,8 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.appcentnasachallenge.R
 import com.example.appcentnasachallenge.model.APIRoverModel
-import com.example.appcentnasachallenge.model.FragmentModel
 import com.example.appcentnasachallenge.model.Photos
 import com.example.appcentnasachallenge.service.NasaAPIService
 import retrofit2.Call
@@ -34,16 +32,17 @@ class OpportunityViewModel(application: Application) : BaseViewModel(application
     }
 
 
-    fun getDatafromAPI_Opportunity() {
+    fun getDatafromAPIOpportunity() {
 
 
-        var call = nasaApiService.getDataOpportunity()
+        val call = nasaApiService.getDataOpportunity()
 
         call.enqueue(object: Callback<APIRoverModel> {
             override fun onResponse(call: Call<APIRoverModel>, response: Response<APIRoverModel>) {
-                var roverModels = response.body()
-                rovers_2 = roverModels!!.photos.clone() as List<Photos>
-                showPhotos(roverModels!!)
+                val roverModels = response.body() ?: return
+
+                rovers_2 = roverModels.photos.clone() as List<Photos>
+                showPhotos(roverModels)
 
 
             }
@@ -71,34 +70,33 @@ class OpportunityViewModel(application: Application) : BaseViewModel(application
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        val selectedOption = parent!!.getItemAtPosition(position).toString()
+        val selectedOption = parent.let {
+            parent?.getItemAtPosition(position).toString()
+        }
 
         if (selectedOption == parent!!.getItemAtPosition(0).toString()) {
             return
         }
 
 
-        if(mockRovers != null) {
-            mockRovers.clear()
-        }
+        mockRovers.clear()
 
 
 
-        for (i in 0..(rovers_2.size)-1) {
+        for (i in rovers_2.indices) {
             if (rovers_2[i].camera.name == selectedOption) {
                 mockRovers.add(rovers_2[i])
             }
         }
 
-
         opportunityRovers.value!!.photos.clear().also {
-            for (i in 0..(mockRovers.size)-1){
-                opportunityRovers.value!!.photos.add(mockRovers[i])
-
+            mockRovers.filter {
+                opportunityRovers.value!!.photos.add(it)
             }
         }
 
         showPhotos(opportunityRovers.value!!)
+
 
     }
 

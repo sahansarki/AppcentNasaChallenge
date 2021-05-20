@@ -8,8 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.appcentnasachallenge.R
 import com.example.appcentnasachallenge.model.APIRoverModel
-import com.example.appcentnasachallenge.model.Photos
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.pop_up.view.*
 import kotlinx.android.synthetic.main.recyclerview_photo_row.view.*
 import kotlinx.android.synthetic.main.recyclerview_photo_row.view.rover_name
@@ -18,9 +16,7 @@ import kotlinx.android.synthetic.main.recyclerview_photo_row.view.rover_status
 class RoversPhotoAdapter(var roverPhotos: APIRoverModel?) :
     RecyclerView.Adapter<RoversPhotoAdapter.CustomViewHolder>() {
 
-    class CustomViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-
-    }
+    class CustomViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
 
@@ -28,6 +24,7 @@ class RoversPhotoAdapter(var roverPhotos: APIRoverModel?) :
         val cellForRow = layoutInflater.inflate(R.layout.recyclerview_photo_row,parent,false)
         return CustomViewHolder(cellForRow)
     }
+
 
 
 
@@ -83,10 +80,8 @@ class RoversPhotoAdapter(var roverPhotos: APIRoverModel?) :
 
     fun updateRoverPhotos(newPhotos: APIRoverModel) {
 
-        roverPhotos ?: null
 
         if(roverPhotos != null) {
-
             roverPhotos!!.photos = newPhotos.photos
             notifyDataSetChanged()
         }

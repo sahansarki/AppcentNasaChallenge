@@ -2,17 +2,12 @@ package com.example.appcentnasachallenge.ui
 
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appcentnasachallenge.R
 import com.example.appcentnasachallenge.adapter.RoversPhotoAdapter
-import com.example.appcentnasachallenge.viewmodel.CuriosityViewModel
-import com.example.appcentnasachallenge.viewmodel.OpportunityViewModel
 import com.example.appcentnasachallenge.viewmodel.SpiritViewModel
-import kotlinx.android.synthetic.main.fragment_curiosity.*
 import kotlinx.android.synthetic.main.fragment_curiosity.recycRoversList
 import kotlinx.android.synthetic.main.fragment_spirit.*
 
@@ -28,7 +23,7 @@ class SpiritFragment : Fragment(R.layout.fragment_spirit) {
 
         viewModelSpirit = ViewModelProvider(this).get(SpiritViewModel::class.java)
         viewModelSpirit.createSpinner(this.requireContext(), spirit_spinner)
-        viewModelSpirit.getDatafromAPI_Spirit()
+        viewModelSpirit.getDatafromAPISpirit()
 
 
 

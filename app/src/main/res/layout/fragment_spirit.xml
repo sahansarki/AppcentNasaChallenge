@@ -12,13 +12,13 @@
         android:id="@+id/spirit_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/nonSelectedText"/>
+        android:background="@color/colorAccent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycRoversList"
         android:layout_width="match_parent"
         app:layoutManager="LinearLayoutManager"
-        android:background="@color/white"
+        android:background="#FF637B"
         android:layout_height="match_parent"
         />
 
