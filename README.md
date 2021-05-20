@@ -1,3 +1,2 @@
 # AppcentNasaChallenge
-
-![github](https://user-images.githubusercontent.com/33380375/119029420-44d39900-b9b1-11eb-84d9-34729113ec9c.gif)
+![Curiosity](https://user-images.githubusercontent.com/33380375/119042620-c2eb6c00-b9c0-11eb-8345-4390371a990e.gif)
