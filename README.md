@@ -1,4 +1,4 @@
 # AppcentNasaChallenge
 
-![Curiosity](https://user-images.githubusercontent.com/33380375/119042620-c2eb6c00-b9c0-11eb-8345-4390371a990e.gif)
 
+<img src="https://user-images.githubusercontent.com/33380375/119043144-689edb00-b9c1-11eb-8f00-7d1271292bba.gif" width="40" height="40" />
