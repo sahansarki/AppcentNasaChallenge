@@ -2,7 +2,7 @@
 
 ## Description
 
-This application base on photos of NASA's Rovers. The user can select the rovers model and also user can filter the selected rover by rover's camera name. The user can see the detail of each photo by clicking the photo.
+This application based on photos of NASA's Rovers. The user can select the rovers model and also user can filter the selected rover by rover's camera name. The user can see the detail of each photo by clicking the photo.
 
 
 ![](https://media.giphy.com/media/98ZNalKrUbPwc7FP5L/giphy.gif)
